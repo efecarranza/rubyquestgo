@@ -1,8 +1,8 @@
 RubyQuest.rubyquest = function(game) {
 	this.hero;
 	this.monster;
-	this.speed = 5;
 	this.cursors;
+	this.mainmap;
 };
 
 RubyQuest.rubyquest.prototype = {
@@ -10,10 +10,10 @@ RubyQuest.rubyquest.prototype = {
 	create: function() {
 		this.world.setBounds(0,0,1280,960);
 		this.physics.startSystem(Phaser.Physics.ARCADE);
-		var map = this.add.sprite(0, 0, 'map');
-		map.height = 640;
-		map.width = 480;
-		monster = this.add.sprite(200, 200, 'monster');
+		mainmap = this.add.sprite(0, 0, 'map');
+		mainmap.height = 640;
+		mainmap.width = 480;
+		monster = this.add.sprite(130, 130, 'monster');
 
 		hero = this.add.sprite(100, 100, 'hero');
 		hero.height = 32;
@@ -29,12 +29,13 @@ RubyQuest.rubyquest.prototype = {
 		cursors = this.input.keyboard.createCursorKeys();
 
 		this.camera.follow(hero, Phaser.Camera.FOLLOW_TOPDOWN);
+		monster.body.immovable = true;
 		hero.body.collideWorldBounds = true;
 
 	},
 
 	update: function() {
-		this.physics.arcade.overlap(hero, monster, this.fight, null, this);
+		this.physics.arcade.collide(hero, monster, this.startFight, null, this);
 		hero.body.velocity.x = 0;
 		hero.body.velocity.y = 0;
 
@@ -57,8 +58,9 @@ RubyQuest.rubyquest.prototype = {
 
 	},
 
-	fight: function() {
+	startFight: function(pointer) {
 		console.log('going to fight');
+		this.state.start('Fight', false, false, this.hero, this.monster);
 	},
 
 	render: function() {
