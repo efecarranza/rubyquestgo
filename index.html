@@ -4,10 +4,13 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Flappy Ed</title>
+	<title>RubyQuest</title>
 
-	<script type="text/javascript" src="empty/phaser.min.js"></script>
-	<script type="text/javascript" src="empty/rubyquest.js"></script>
+	<script src="empty/phaser.min.js"></script>
+	<script src="empty/Boot.js"></script>
+	<script src="empty/Preloader.js"></script>
+	<script src="empty/StartMenu.js"></script>
+	<script src="empty/rubyquest.js"></script>
 	<style>
 		p {font-family: Arial;
 			font-size: 20px;
@@ -18,7 +21,6 @@
 		canvas { display:block;
 				 margin: auto;
 		}
-
 	</style>
 
 </head>
@@ -27,6 +29,16 @@
 	<p> Phaser Test </p>
 	<p> Use Arrow Keys. </p>
 	<div id="rubyquest"></div>
+	<script type="text/javascript">
+	window.onload = function() {
+		var game = new Phaser.Game(640, 480, Phaser.CANVAS, 'rubyquest');
+		game.state.add('Boot', RubyQuest.Boot);
+		game.state.add('Preloader', RubyQuest.Preloader);
+		game.state.add('StartMenu', RubyQuest.StartMenu);
+		game.state.add('rubyquest', RubyQuest.rubyquest);
+		game.state.start('Boot');
+	}
+	</script>
 	<p> Testing Phaser Framework.</p>
 
 </body>
