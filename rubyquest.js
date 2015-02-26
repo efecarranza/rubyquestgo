@@ -1,11 +1,22 @@
 RubyQuest.rubyquest = function(game) {
-	this.hero;
+	this.hero = {
+		name: "Wynn",
+		maxHp: 200,
+		hp: 200,
+		str: 15,
+		def: 8,
+		level: 1,
+		exp: 0,
+	};
 	this.monster;
 	this.cursors;
 	this.mainmap;
 };
 
 RubyQuest.rubyquest.prototype = {
+
+	init: function(hero, monster) {
+	},
 
 	create: function() {
 		this.world.setBounds(0,0,1280,960);
@@ -16,8 +27,8 @@ RubyQuest.rubyquest.prototype = {
 		monster = this.add.sprite(130, 130, 'monster');
 
 		hero = this.add.sprite(100, 100, 'hero');
-		hero.height = 32;
-		hero.width = 32;
+		// hero.height = 32;
+		// hero.width = 32;
 		hero.anchor.setTo(0.5, 0.5);
 		hero.animations.add('walkup', [0,1,2,3,4,5,6,7,8]);
 		hero.animations.add('walkleft', [9,10,11,12,13,14,15,16,17]);
@@ -58,7 +69,7 @@ RubyQuest.rubyquest.prototype = {
 
 	},
 
-	startFight: function(pointer) {
+	startFight: function() {
 		console.log('going to fight');
 		this.state.start('Fight', false, false, this.hero, this.monster);
 	},

@@ -1,21 +1,36 @@
 RubyQuest.Fight = function(game) {
 	this.bg;
+	this.attackButton;
 	this.fighterOne;
 	this.fighterTwo;
+	this.menuLabel;
+	this.attackButton;
+	this.runButton;
 };
 
 RubyQuest.Fight.prototype = {
 
-	// init: function(hero, monster) {
-	// 	hero.height = 128;
-	// 	hero.width = 128;
-	// },
+	init: function(hero, monster) {
+		
+	},
 
 	create: function() {
 		bg = this.add.image(0, 0, 'battlebg');
-		fighterOne = this.add.sprite(150, 300, 'herofight');
+		menuLabel = this.add.image(20, 360, 'label');
+		menuLabel.width = 600;
+		menuLabel.height = 100;
+
+		attackButton = this.add.button(40, 370, 'label', this.attack, this, 2, 1, 0);
+		attackButton.width = 120;
+		attackButton.height = 30;
+
+		runButton = this.add.button(40, 420, 'label', this.run, this, 2,1, 0);
+		runButton.width = 120;
+		runButton.height = 30;
+
+		fighterOne = this.add.sprite(150, 260, 'herofight');
 		fighterOne.anchor.setTo(0.5,0.5);
-		fighterTwo = this.add.sprite(400, 260, 'monster');
+		fighterTwo = this.add.sprite(400, 220, 'monster');
 
 		fighterOne.height = 320;
 		fighterOne.width = 208;
@@ -24,10 +39,21 @@ RubyQuest.Fight.prototype = {
 
 		fighterOne.animations.add('attack');
 
+
 	},
 
 	update: function() {
-		fighterOne.animations.play('attack', 6, false);
+		// fighterOne.animations.play('attack', 10, false);
+
+	},
+
+	attack: function() {
+		fighterOne.animations.play('attack', 10, false);
+
+	},
+
+	run: function() {
+		this.state.start('rubyquest', true, false, this.hero, this.monster);
 
 	},
 };

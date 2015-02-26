@@ -16,6 +16,8 @@ RubyQuest.Preloader.prototype = {
 		this.load.spritesheet('herofight', 'empty/assets/herofight.png', 190, 104);
 		this.load.image('monster', 'empty/assets/monster.png');
 		this.load.image('battlebg', 'empty/assets/battlebackground.png');
+		this.load.spritesheet('logo', 'empty/assets/rubyquestlogo.png', 178, 197);
+		this.load.image('label', 'empty/assets/label.png');
 		},
 
 		create: function() {

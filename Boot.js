@@ -21,7 +21,7 @@ RubyQuest.Boot = function(game) {
 			this.scale.setScreenSize(true);
 
 			this.input.addPointer();
-			this.stage.backgroundColor = "#212121";
+			this.stage.backgroundColor = "#000";
 
 			this.state.start('Preloader');
 		}
