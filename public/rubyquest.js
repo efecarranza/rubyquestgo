@@ -11,6 +11,7 @@ RubyQuest.rubyquest = function(game) {
 	this.monster;
 	this.cursors;
 	this.mainmap;
+	this.menuKey;
 };
 
 RubyQuest.rubyquest.prototype = {
@@ -38,6 +39,8 @@ RubyQuest.rubyquest.prototype = {
 		this.physics.arcade.enable([hero, monster]);
 
 		cursors = this.input.keyboard.createCursorKeys();
+		menuKey = this.input.keyboard.addKey(Phaser.Keyboard.M);
+		menuKey.onDown.add(this.menu, this);
 
 		this.camera.follow(hero, Phaser.Camera.FOLLOW_TOPDOWN);
 		monster.body.immovable = true;
@@ -72,6 +75,10 @@ RubyQuest.rubyquest.prototype = {
 	startFight: function() {
 		console.log('going to fight');
 		this.state.start('Fight', false, false, this.hero, this.monster);
+	},
+
+	menu: function() {
+		console.log('menu');
 	},
 
 	render: function() {

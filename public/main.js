@@ -12,11 +12,11 @@ var mainState = {
 		game.stage.backgroundColor = '#B2DFDB';
 
 		// Load Ed image
-		game.load.image('maded', 'empty/assets/maded.png');
-		game.load.image('happyed', 'empty/assets/happyed.png');
+		game.load.image('maded', 'assets/maded.png');
+		game.load.image('happyed', 'assets/happyed.png');
 
 		// Add pipes to avoid
-		game.load.image('pipe', 'empty/assets/ruby2.png');
+		game.load.image('pipe', 'assets/ruby2.png');
 
 	},
 
