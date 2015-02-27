@@ -44,6 +44,10 @@
 		game.state.add('Fight', RubyQuest.Fight);
 		game.state.start('Boot');
 	}
+
+	$(window).resize(function(){
+		$('#menu').css({'position':'absolute','top':$('canvas').offset().top+'px','left':$('canvas').offset().left+'px'});
+	});
 	</script>
 
 </body>

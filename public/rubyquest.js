@@ -67,11 +67,7 @@ RubyQuest.rubyquest.prototype = {
 
 	update: function() {
 		this.physics.arcade.collide(hero, monster, this.startFight, null, this);
-		
 		this.physics.arcade.collide(hero, ed, null, null, this);
-		if(this.physics.arcade.distanceBetween(hero,ed) < 100 && interactKey.isDown){
-			this.talk();
-		}
 
 		hero.body.velocity.x = 0;
 		hero.body.velocity.y = 0;
@@ -101,15 +97,16 @@ RubyQuest.rubyquest.prototype = {
 	},
 
 	menu: function() {
-		$('#menu').toggle();
+		$('#menu').toggle().css({'position':'absolute','top':$('canvas').offset().top+'px','left':$('canvas').offset().left+'px'});
 		$('#hpMenu').text("HP: " + hero.stats.hp + ' / ' + hero.stats.maxHp);
 	},
 
 
 	interact: function() {
 		// document.getElementById('input').innerHTML = '<input type="text" size="100">';
-
-
+		if(this.physics.arcade.distanceBetween(hero,ed) < 100){
+			this.talk();
+		}
 	},
 
 	// represents whether the hero is talking
@@ -120,19 +117,24 @@ RubyQuest.rubyquest.prototype = {
 		// check to see if talking
 		if(!this.currently_talking){
 			// this is where the dialogue cycle goes
+			this.currently_talking = true;
 			// set dialogue line to 0 (fist line)
 			currentLine = 0;			
 			// bring up the dialogue box
 			$('#dialogue').toggle();
 			// on interact key down, bring up next line in dialogue array
 			$('#dialogue').text(ed.lines[currentLine]);
-
-
-			this.currently_talking = true;
 			console.log('starting conversation');
-
 		} else {
+			// on spacebar, cycle to next line of dialogue
+			currentLine++;
+			// on interact key down, bring up next line in dialogue array
+			$('#dialogue').text(ed.lines[currentLine]);
 			console.log('already in conversation');
+			if (currentLine > ed.lines.length) {
+				this.currently_talking = false;
+				$('#dialogue').toggle();
+			}
 		}
 		
 		// currentLine = 0;
