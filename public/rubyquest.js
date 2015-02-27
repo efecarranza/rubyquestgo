@@ -136,17 +136,6 @@ RubyQuest.rubyquest.prototype = {
 				$('#dialogue').toggle();
 			}
 		}
-		
-		// currentLine = 0;
-		// $('#dialogue').toggle();
-		// if (this.currentLine > ed.lines.length) {
-		// 	$('#dialogue').toggle();
-		// };
-		// $('#dialogue').text(ed.lines[this.currentLine]);
-		// if (interactKey.isDown) {
-		// 	this.currentLine++;
-		// };
-
 	},
 
 		// pauses the game
