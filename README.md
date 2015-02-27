@@ -6,7 +6,7 @@ Phaser: http://phaser.io (github: https://github.com/photonstorm/phaser)
 # Set up
 1. `cd` to your projects folder where this repo lives (like: `cd ~/projects`)
 2. Make sure you have sinatra installed (if not, `gem install sinatra`)
-3. `ruby server2.rb`
+3. `ruby server2.rb && open http://localhost:4567`
 
 # File structure
 
