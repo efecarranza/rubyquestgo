@@ -9,6 +9,9 @@ RubyQuest.Fight = function(game) {
 	this.txtStyle;
 	this.attacktxt;
 	this.runtxt;
+	this.heroNamelbl;
+	this.heroMaxHp;
+	this.heroHp;
 };
 
 RubyQuest.Fight.prototype = {
@@ -23,18 +26,21 @@ RubyQuest.Fight.prototype = {
 		menuLabel.width = 600;
 		menuLabel.height = 100;
 
-		attackButton = this.add.button(40, 370, 'label', this.attack, this, 2, 1, 0);
+		attackButton = this.add.button(340, 370, 'label', this.attack, this, 2, 1, 0);
 		attackButton.width = 120;
 		attackButton.height = 30;
 
-		runButton = this.add.button(40, 420, 'label', this.run, this, 2,1, 0);
+		runButton = this.add.button(340, 420, 'label', this.run, this, 2,1, 0);
 		runButton.width = 120;
 		runButton.height = 30;
 
 		txtStyle = { font: "20px Arial", fill: "#fff", align: "center" };
-		attacktxt = this.add.text(65, 373, 'Attack', txtStyle);
-		runtxt = this.add.text(65, 423, 'Run', txtStyle);
+		attacktxt = this.add.text(365, 373, 'Attack', txtStyle);
+		runtxt = this.add.text(365, 423, 'Run', txtStyle);
 
+		heroNamelbl = this.add.text(65, 373, hero.stats.name, txtStyle);
+		heroHp = this.add.text(65, 403, "HP: " + hero.stats.hp + " /", txtStyle);
+		heroMaxHp = this.add.text(155, 403, hero.stats.maxHp, txtStyle);
 
 		fighterOne = this.add.sprite(150, 260, 'herofight');
 		fighterOne.anchor.setTo(0.5,0.5);

@@ -1,13 +1,5 @@
 RubyQuest.rubyquest = function(game) {
-	this.hero = {
-		name: "Wynn",
-		maxHp: 200,
-		hp: 200,
-		str: 15,
-		def: 8,
-		level: 1,
-		exp: 0,
-	};
+	this.hero;
 	this.monster;
 	this.cursors;
 	this.mainmap;
@@ -19,6 +11,7 @@ RubyQuest.rubyquest = function(game) {
 RubyQuest.rubyquest.prototype = {
 
 	init: function(hero, monster) {
+
 	},
 
 	create: function() {
@@ -28,6 +21,15 @@ RubyQuest.rubyquest.prototype = {
 		monster = this.add.sprite(330, 630, 'monster');
 
 		hero = this.add.sprite(600, 780, 'hero');
+		hero.stats = {
+		name: "Wynn",
+		maxHp: 200,
+		hp: 200,
+		str: 15,
+		def: 8,
+		level: 1,
+		exp: 0,
+	};
 		// hero.height = 32;
 		// hero.width = 32;
 		hero.anchor.setTo(0.5, 0.5);
