@@ -121,7 +121,7 @@ RubyQuest.rubyquest.prototype = {
 			// set dialogue line to 0 (fist line)
 			currentLine = 0;			
 			// bring up the dialogue box
-			$('#dialogue').toggle();
+			$('#dialogue').toggle().css({'position':'absolute','top':$('canvas').offset().top+20+-'px','left':$('canvas').offset().left+20+'px'});
 			// on interact key down, bring up next line in dialogue array
 			$('#dialogue').text(ed.lines[currentLine]);
 			console.log('starting conversation');
