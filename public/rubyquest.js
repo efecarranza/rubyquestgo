@@ -18,7 +18,7 @@ RubyQuest.rubyquest.prototype = {
 	},
 
 	create: function() {
-		this.world.setBounds(0,0,2891,2168);
+		this.world.setBounds(0,0,3200,2400);
 		this.physics.startSystem(Phaser.Physics.ARCADE);
 		mainmap = this.add.sprite(0, 0, 'map');
 		monster = this.add.sprite(330, 630, 'monster');
@@ -65,8 +65,11 @@ RubyQuest.rubyquest.prototype = {
 
 	update: function() {
 		this.physics.arcade.collide(hero, monster, this.startFight, null, this);
-
-		this.physics.arcade.collide(hero, ed, this.talk, null, this);
+		
+		this.physics.arcade.collide(hero, ed, null, null, this);
+		if(this.physics.arcade.distanceBetween(hero,ed) < 100 && interactKey.isDown){
+			this.talk();
+		}
 
 		hero.body.velocity.x = 0;
 		hero.body.velocity.y = 0;
@@ -101,22 +104,30 @@ RubyQuest.rubyquest.prototype = {
 	},
 
 	interact: function() {
-		console.log('interact');
-		document.getElementById('input').innerHTML = '<input type="text">';
+		// document.getElementById('input').innerHTML = '<input type="text" size="100">';
 
 
 	},
 
+	currently_talking: false,
+
 	talk: function(character) {
-		currentLine = 0;
-		$('#dialogue').toggle();
-		if (this.currentLine > ed.lines.length) {
-			$('#dialogue').toggle();
-		};
-		$('#dialogue').text(ed.lines[this.currentLine]);
-		if (interactKey.isDown) {
-			this.currentLine++;
-		};
+		if(!this.currently_talking){
+			this.currently_talking = true;
+			console.log('starting conversation');
+		} else {
+			console.log('already in conversation');
+		}
+		
+		// currentLine = 0;
+		// $('#dialogue').toggle();
+		// if (this.currentLine > ed.lines.length) {
+		// 	$('#dialogue').toggle();
+		// };
+		// $('#dialogue').text(ed.lines[this.currentLine]);
+		// if (interactKey.isDown) {
+		// 	this.currentLine++;
+		// };
 
 	},
 
