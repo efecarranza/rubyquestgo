@@ -21,11 +21,13 @@ RubyQuest.Fight.prototype = {
 	},
 
 	create: function() {
+		// Create Background and Battle Menu
 		bg = this.add.image(0, 0, 'battlebg');
 		menuLabel = this.add.image(20, 360, 'label');
 		menuLabel.width = 600;
 		menuLabel.height = 100;
 
+		// Add Buttons and Labels
 		attackButton = this.add.button(340, 370, 'label', this.attack, this, 2, 1, 0);
 		attackButton.width = 120;
 		attackButton.height = 30;
@@ -42,6 +44,25 @@ RubyQuest.Fight.prototype = {
 		heroHp = this.add.text(65, 403, "HP: " + hero.stats.hp + " /", txtStyle);
 		heroMaxHp = this.add.text(155, 403, hero.stats.maxHp, txtStyle);
 
+		this.black_bar = this.add.sprite(20, 40, 'black_bar');
+		this.physics.arcade.enableBody(this.black_bar);
+		this.black_bar.anchor.setTo(0,0);
+
+		this.black2_bar = this.add.sprite(20, 60, 'black_bar');
+		this.physics.arcade.enableBody(this.black2_bar);
+		this.black2_bar.anchor.setTo(0, 0);
+
+		//GUI - red bar for life
+		this.blood_bar = this.add.sprite(20, 40, 'red_bar');
+		this.physics.arcade.enableBody(this.blood_bar);
+		this.blood_bar.anchor.setTo(0, 0);
+
+		//GUI - red bar for mana (ok, it's yellow I know)
+		this.green_bar = this.add.sprite(20, 60, 'yellow_bar');
+		this.physics.arcade.enableBody(this.green_bar);
+		this.green_bar.anchor.setTo(0, 0);
+
+		// Create Fighters
 		fighterOne = this.add.sprite(150, 260, 'herofight');
 		fighterOne.anchor.setTo(0.5,0.5);
 		fighterTwo = this.add.sprite(400, 220, 'monster');
@@ -51,6 +72,7 @@ RubyQuest.Fight.prototype = {
 		fighterTwo.height = 128;
 		fighterTwo.width = 96;
 
+		// Add animations
 		fighterOne.animations.add('attack', [0,1,2,3,4,5,0]);
 
 
@@ -58,6 +80,8 @@ RubyQuest.Fight.prototype = {
 
 	update: function() {
 		// fighterOne.animations.play('attack', 10, false);
+		hero.stats.hp -= 0.05;
+		this.blood_bar.scale.setTo((hero.stats.hp / hero.stats.maxHp), 1);
 
 	},
 

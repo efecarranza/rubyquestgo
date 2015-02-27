@@ -1,11 +1,14 @@
 RubyQuest.rubyquest = function(game) {
 	this.hero;
+	this.ed;
 	this.monster;
 	this.cursors;
 	this.mainmap;
 	this.menuKey;
 	this.interactKey;
 	this.pauseKey;
+	this.dialogue;
+	this.currentLine;
 };
 
 RubyQuest.rubyquest.prototype = {
@@ -20,6 +23,12 @@ RubyQuest.rubyquest.prototype = {
 		mainmap = this.add.sprite(0, 0, 'map');
 		monster = this.add.sprite(330, 630, 'monster');
 
+		ed = this.add.sprite(500, 780, 'ed'); // make 166, 2020 after debug
+		ed.lines = ["Hello, I can see you are beginning a journey...", "...a journey that will take you to many dark places.",
+			"You will need a great power to succeed.", "A power that only could be channeled through....Ruby...",
+			"This Ruby was long ago shattered into many pieces.", "Only fragments of it remain, which in common lore are referred to as 'gems.'",
+			"In order to unlock the power of the gem you are going to need to speak to it first...", "Let me explain you the basics:" ]
+
 		hero = this.add.sprite(600, 780, 'hero');
 		hero.stats = {
 		name: "Wynn",
@@ -29,16 +38,15 @@ RubyQuest.rubyquest.prototype = {
 		def: 8,
 		level: 1,
 		exp: 0,
-	};
-		// hero.height = 32;
-		// hero.width = 32;
+		};
+
 		hero.anchor.setTo(0.5, 0.5);
 		hero.animations.add('walkup', [0,1,2,3,4,5,6,7,8]);
 		hero.animations.add('walkleft', [9,10,11,12,13,14,15,16,17]);
 		hero.animations.add('walkdown', [18,19,20,21,22,23,24,25,26]);
 		hero.animations.add('walkright', [27,28,29,30,31,32,33,34,35]);
 
-		this.physics.arcade.enable([hero, monster]);
+		this.physics.arcade.enable([hero, monster, ed]);
 
 		cursors = this.input.keyboard.createCursorKeys();
 		menuKey = this.input.keyboard.addKey(Phaser.Keyboard.M);
@@ -50,12 +58,16 @@ RubyQuest.rubyquest.prototype = {
 
 		this.camera.follow(hero, Phaser.Camera.FOLLOW_TOPDOWN);
 		monster.body.immovable = true;
+		ed.body.immovable = true;
 		hero.body.collideWorldBounds = true;
 
 	},
 
 	update: function() {
 		this.physics.arcade.collide(hero, monster, this.startFight, null, this);
+
+		this.physics.arcade.collide(hero, ed, this.talk, null, this);
+
 		hero.body.velocity.x = 0;
 		hero.body.velocity.y = 0;
 
@@ -84,13 +96,27 @@ RubyQuest.rubyquest.prototype = {
 	},
 
 	menu: function() {
-		console.log('menu');
-		$('#dialogue').toggle();
+		$('#menu').toggle();
+		document.getElementById("hpMenu").innerHTML = "HP: " + hero.stats.hp + ' / ' + hero.stats.maxHp;
 	},
 
 	interact: function() {
 		console.log('interact');
+		document.getElementById('input').innerHTML = '<input type="text">';
 
+
+	},
+
+	talk: function(character) {
+		currentLine = 0;
+		$('#dialogue').toggle();
+		if (this.currentLine > ed.lines.length) {
+			$('#dialogue').toggle();
+		};
+		$('#dialogue').text(ed.lines[this.currentLine]);
+		if (interactKey.isDown) {
+			this.currentLine++;
+		};
 
 	},
 
