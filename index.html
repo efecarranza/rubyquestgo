@@ -6,6 +6,9 @@
 	<meta charset="utf-8">
 	<title>RubyQuest</title>
 
+	<!-- Add jQuery library -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 	<script src="phaser.min.js"></script>
 	<script src="Boot.js"></script>
 	<script src="Preloader.js"></script>
@@ -22,13 +25,21 @@
 		canvas { display:block;
 				 margin: auto;
 		}
+
+		#dialogue {
+			position: absolute;
+			left: 150px;
+			top: 100px;
+		}
 	</style>
 
 </head>
 
 <body>
 	<p> Phaser Test </p>
-	<p> Use Arrow Keys. </p>
+	<div id="dialogue" hidden="true">
+		<img src="assets/menu.png">
+	</div>
 	<div id="rubyquest"></div>
 	<script type="text/javascript">
 	window.onload = function() {
@@ -41,7 +52,6 @@
 		game.state.start('Boot');
 	}
 	</script>
-	<p> Testing Phaser Framework.</p>
 
 </body>
 </html>

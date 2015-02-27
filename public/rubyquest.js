@@ -12,6 +12,8 @@ RubyQuest.rubyquest = function(game) {
 	this.cursors;
 	this.mainmap;
 	this.menuKey;
+	this.interactKey;
+	this.pauseKey;
 };
 
 RubyQuest.rubyquest.prototype = {
@@ -20,14 +22,12 @@ RubyQuest.rubyquest.prototype = {
 	},
 
 	create: function() {
-		this.world.setBounds(0,0,1280,960);
+		this.world.setBounds(0,0,2891,2168);
 		this.physics.startSystem(Phaser.Physics.ARCADE);
 		mainmap = this.add.sprite(0, 0, 'map');
-		mainmap.height = 640;
-		mainmap.width = 480;
-		monster = this.add.sprite(130, 130, 'monster');
+		monster = this.add.sprite(330, 630, 'monster');
 
-		hero = this.add.sprite(100, 100, 'hero');
+		hero = this.add.sprite(600, 780, 'hero');
 		// hero.height = 32;
 		// hero.width = 32;
 		hero.anchor.setTo(0.5, 0.5);
@@ -41,6 +41,10 @@ RubyQuest.rubyquest.prototype = {
 		cursors = this.input.keyboard.createCursorKeys();
 		menuKey = this.input.keyboard.addKey(Phaser.Keyboard.M);
 		menuKey.onDown.add(this.menu, this);
+		interactKey = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+		interactKey.onDown.add(this.interact, this);
+		pauseKey = this.input.keyboard.addKey(Phaser.Keyboard.P);
+		pauseKey.onDown.add(this.pause, this);
 
 		this.camera.follow(hero, Phaser.Camera.FOLLOW_TOPDOWN);
 		monster.body.immovable = true;
@@ -79,6 +83,17 @@ RubyQuest.rubyquest.prototype = {
 
 	menu: function() {
 		console.log('menu');
+		$('#dialogue').toggle();
+	},
+
+	interact: function() {
+		console.log('interact');
+
+
+	},
+
+	pause: function() {
+		console.log('pause');
 	},
 
 	render: function() {
