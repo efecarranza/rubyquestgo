@@ -14,7 +14,9 @@ RubyQuest.rubyquest = function(game) {
 RubyQuest.rubyquest.prototype = {
 
 	init: function(hero, monster) {
-
+		// there will be an opening scene state
+		// where the hero will be created and passed to
+		// the next scene 
 	},
 
 	create: function() {
@@ -73,23 +75,23 @@ RubyQuest.rubyquest.prototype = {
 
 		hero.body.velocity.x = 0;
 		hero.body.velocity.y = 0;
-
-		if (cursors.up.isDown) {
-			hero.body.velocity.y = -80;
-			hero.animations.play('walkup', 10, true);
-		} else if (cursors.down.isDown) {
-			hero.body.velocity.y = 80;
-			hero.animations.play('walkdown', 10, true);
-		} else if (cursors.left.isDown) {
-			hero.body.velocity.x = -80;
-			hero.animations.play('walkleft', 10, true);
-		} else if (cursors.right.isDown) {
-			hero.body.velocity.x = 80;
-			hero.animations.play('walkright', 10, true);
-		} else {
-			hero.animations.stop(null, true);
+		if (!this.currently_talking) {
+			if (cursors.up.isDown) {
+				hero.body.velocity.y = -80;
+				hero.animations.play('walkup', 10, true);
+			} else if (cursors.down.isDown) {
+				hero.body.velocity.y = 80;
+				hero.animations.play('walkdown', 10, true);
+			} else if (cursors.left.isDown) {
+				hero.body.velocity.x = -80;
+				hero.animations.play('walkleft', 10, true);
+			} else if (cursors.right.isDown) {
+				hero.body.velocity.x = 80;
+				hero.animations.play('walkright', 10, true);
+			} else {
+				hero.animations.stop(null, true);
+			};
 		};
-
 
 	},
 
@@ -100,8 +102,9 @@ RubyQuest.rubyquest.prototype = {
 
 	menu: function() {
 		$('#menu').toggle();
-		document.getElementById("hpMenu").innerHTML = "HP: " + hero.stats.hp + ' / ' + hero.stats.maxHp;
+		$('#hpMenu').text("HP: " + hero.stats.hp + ' / ' + hero.stats.maxHp);
 	},
+
 
 	interact: function() {
 		// document.getElementById('input').innerHTML = '<input type="text" size="100">';
@@ -109,12 +112,25 @@ RubyQuest.rubyquest.prototype = {
 
 	},
 
+	// represents whether the hero is talking
 	currently_talking: false,
 
+	// this makes the hero talk
 	talk: function(character) {
+		// check to see if talking
 		if(!this.currently_talking){
+			// this is where the dialogue cycle goes
+			// set dialogue line to 0 (fist line)
+			currentLine = 0;			
+			// bring up the dialogue box
+			$('#dialogue').toggle();
+			// on interact key down, bring up next line in dialogue array
+			$('#dialogue').text(ed.lines[currentLine]);
+
+
 			this.currently_talking = true;
 			console.log('starting conversation');
+
 		} else {
 			console.log('already in conversation');
 		}
@@ -131,6 +147,7 @@ RubyQuest.rubyquest.prototype = {
 
 	},
 
+		// pauses the game
 	pause: function() {
 		console.log('pause');
 	},
