@@ -13,6 +13,7 @@
 	<script src="Boot.js"></script>
 	<script src="Preloader.js"></script>
 	<script src="StartMenu.js"></script>
+	<script src="Dream.js"></script>
 	<script src="rubyquest.js"></script>
 	<script src="Fight.js"></script>
 
@@ -24,11 +25,12 @@
 	<p> Phaser Test </p>
 	<div id="menu" hidden="true">
 		<img src="assets/menu.png">
-		<img src="assets/heromenu.png" style="position:absolute top: -100px;">
+		<img src="assets/heromenu.png" id="menuHero">
+		<p>Stats</p>
+		<p id="nameMenu"></p>
 		<p id="hpMenu"></p>
 	</div>
 	<div id="dialogue" hidden="true">
-		<img src="assets/label.png">
 	</div>
 	<div id="input">
 
@@ -40,6 +42,7 @@
 		game.state.add('Boot', RubyQuest.Boot);
 		game.state.add('Preloader', RubyQuest.Preloader);
 		game.state.add('StartMenu', RubyQuest.StartMenu);
+		game.state.add('Dream', RubyQuest.Dream);
 		game.state.add('rubyquest', RubyQuest.rubyquest);
 		game.state.add('Fight', RubyQuest.Fight);
 		game.state.start('Boot');
@@ -47,7 +50,7 @@
 
 	$(window).resize(function(){
 		$('#menu').css({'position':'absolute','top':$('canvas').offset().top+'px','left':$('canvas').offset().left+'px'});
-		$('#dialogue').css({'position':'absolute','top':$('canvas').offset().top+20+-'px','left':$('canvas').offset().left+20+'px'});
+		$('#dialogue').css({'position':'absolute','top':$('canvas').offset().top+20+'px','left':$('canvas').offset().left+20+'px'});
 	});
 	</script>
 

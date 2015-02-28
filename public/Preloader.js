@@ -22,6 +22,8 @@ RubyQuest.Preloader.prototype = {
 		this.load.image('red_bar', 'assets/red_bar.png');
 		this.load.image('black_bar', 'assets/black_bar.png');
 		this.load.image('yellow_bar', 'assets/green_bar.png');
+		this.load.image('ruby', 'assets/ruby.png');
+		this.load.image('rubyshard', 'assets/dreamparticle.png');
 		},
 
 		create: function() {

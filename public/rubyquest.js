@@ -13,7 +13,7 @@ RubyQuest.rubyquest = function(game) {
 
 RubyQuest.rubyquest.prototype = {
 
-	init: function(hero, monster) {
+	init: function(hero) {
 		// there will be an opening scene state
 		// where the hero will be created and passed to
 		// the next scene 
@@ -92,13 +92,13 @@ RubyQuest.rubyquest.prototype = {
 	},
 
 	startFight: function() {
-		console.log('going to fight');
 		this.state.start('Fight', false, false, this.hero, this.monster);
 	},
 
 	menu: function() {
 		$('#menu').toggle().css({'position':'absolute','top':$('canvas').offset().top+'px','left':$('canvas').offset().left+'px'});
 		$('#hpMenu').text("HP: " + hero.stats.hp + ' / ' + hero.stats.maxHp);
+		$('#nameMenu').text("Name: " + hero.stats.name);
 	},
 
 
@@ -124,29 +124,18 @@ RubyQuest.rubyquest.prototype = {
 			$('#dialogue').toggle().css({'position':'absolute','top':$('canvas').offset().top+20+-'px','left':$('canvas').offset().left+20+'px'});
 			// on interact key down, bring up next line in dialogue array
 			$('#dialogue').text(ed.lines[currentLine]);
-			console.log('starting conversation');
 		} else {
 			// on spacebar, cycle to next line of dialogue
 			currentLine++;
-			// on interact key down, bring up next line in dialogue array
-			$('#dialogue').text(ed.lines[currentLine]);
-			console.log('already in conversation');
-			if (currentLine > ed.lines.length) {
+			if (currentLine === ed.lines.length) {
 				this.currently_talking = false;
 				$('#dialogue').toggle();
 			}
+			// on interact key down, bring up next line in dialogue array
+			$('#dialogue').text(ed.lines[currentLine]);
+			
 		}
 		
-		// currentLine = 0;
-		// $('#dialogue').toggle();
-		// if (this.currentLine > ed.lines.length) {
-		// 	$('#dialogue').toggle();
-		// };
-		// $('#dialogue').text(ed.lines[this.currentLine]);
-		// if (interactKey.isDown) {
-		// 	this.currentLine++;
-		// };
-
 	},
 
 		// pauses the game

@@ -36,7 +36,7 @@ RubyQuest.Fight.prototype = {
 		runButton.width = 120;
 		runButton.height = 30;
 
-		txtStyle = { font: "20px Arial", fill: "#fff", align: "center" };
+		txtStyle = { font: "20px Eletrolize", fill: "#fff", align: "center" };
 		attacktxt = this.add.text(365, 373, 'Attack', txtStyle);
 		runtxt = this.add.text(365, 423, 'Run', txtStyle);
 
@@ -79,7 +79,6 @@ RubyQuest.Fight.prototype = {
 	},
 
 	update: function() {
-		// fighterOne.animations.play('attack', 10, false);
 		hero.stats.hp -= 0.05;
 		this.blood_bar.scale.setTo((hero.stats.hp / hero.stats.maxHp), 1);
 
@@ -91,7 +90,7 @@ RubyQuest.Fight.prototype = {
 	},
 
 	run: function() {
-		this.state.start('rubyquest', true, false, this.hero, this.monster);
+		this.state.start('rubyquest', false, false);
 
 	},
 };
