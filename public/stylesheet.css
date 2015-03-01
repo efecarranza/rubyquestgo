@@ -29,7 +29,16 @@ canvas {
 	width:480px;
 	height: 640px;
 	position: absolute;
-	left: 250px;			
+	left: 250px;
+	color: #fff;
+	font-family: Arial;
+}
+
+#teachings {
+	width:480px;
+	height: 640px;
+	position: absolute;
+	left: 250px;
 	color: #fff;
 	font-family: Arial;
 }

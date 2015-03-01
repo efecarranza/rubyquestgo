@@ -17,7 +17,7 @@ RubyQuest.Fight = function(game) {
 RubyQuest.Fight.prototype = {
 
 	init: function(hero, monster) {
-		
+
 	},
 
 	create: function() {
@@ -36,7 +36,7 @@ RubyQuest.Fight.prototype = {
 		runButton.width = 120;
 		runButton.height = 30;
 
-		txtStyle = { font: "20px Eletrolize", fill: "#fff", align: "center" };
+		txtStyle = { font: "20px Arial", fill: "#fff", align: "center" };
 		attacktxt = this.add.text(365, 373, 'Attack', txtStyle);
 		runtxt = this.add.text(365, 423, 'Run', txtStyle);
 

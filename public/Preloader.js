@@ -13,6 +13,7 @@ RubyQuest.Preloader.prototype = {
 		this.add.text(this.world.centerX-50, this.world.centerY+40, "loading...", { font: "35px Arial", fill: "#fff", align: "center" });
 		this.load.image('map', 'assets/rqmap.png');
 		this.load.spritesheet('hero', 'assets/walk.png', 63, 62);
+		this.load.spritesheet('herobw', 'assets/walkbw.png', 63, 62);
 		this.load.spritesheet('herofight', 'assets/herofight.png', 190, 104);
 		this.load.image('monster', 'assets/monster.png');
 		this.load.image('battlebg', 'assets/battlebackground.png');
@@ -24,6 +25,7 @@ RubyQuest.Preloader.prototype = {
 		this.load.image('yellow_bar', 'assets/green_bar.png');
 		this.load.image('ruby', 'assets/ruby.png');
 		this.load.image('rubyshard', 'assets/dreamparticle.png');
+		this.load.image('cat', 'assets/cat.png');
 		},
 
 		create: function() {

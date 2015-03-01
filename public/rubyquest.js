@@ -1,6 +1,7 @@
 RubyQuest.rubyquest = function(game) {
 	this.hero;
 	this.ed;
+	this.jo;
 	this.monster;
 	this.cursors;
 	this.mainmap;
@@ -16,7 +17,7 @@ RubyQuest.rubyquest.prototype = {
 	init: function(hero) {
 		// there will be an opening scene state
 		// where the hero will be created and passed to
-		// the next scene 
+		// the next scene
 	},
 
 	create: function() {
@@ -24,6 +25,8 @@ RubyQuest.rubyquest.prototype = {
 		this.physics.startSystem(Phaser.Physics.ARCADE);
 		mainmap = this.add.sprite(0, 0, 'map');
 		monster = this.add.sprite(330, 630, 'monster');
+
+		jo = this.add.sprite(450, 700, 'cat');
 
 		ed = this.add.sprite(500, 780, 'ed'); // make 166, 2020 after debug
 		ed.lines = ["Hello, I can see you are beginning a journey...", "...a journey that will take you to many dark places.",
@@ -48,7 +51,7 @@ RubyQuest.rubyquest.prototype = {
 		hero.animations.add('walkdown', [18,19,20,21,22,23,24,25,26]);
 		hero.animations.add('walkright', [27,28,29,30,31,32,33,34,35]);
 
-		this.physics.arcade.enable([hero, monster, ed]);
+		this.physics.arcade.enable([hero, monster, ed, jo]);
 
 		cursors = this.input.keyboard.createCursorKeys();
 		menuKey = this.input.keyboard.addKey(Phaser.Keyboard.M);
@@ -61,6 +64,7 @@ RubyQuest.rubyquest.prototype = {
 		this.camera.follow(hero, Phaser.Camera.FOLLOW_TOPDOWN);
 		monster.body.immovable = true;
 		ed.body.immovable = true;
+		jo.body.immovable = true;
 		hero.body.collideWorldBounds = true;
 
 	},
@@ -68,6 +72,7 @@ RubyQuest.rubyquest.prototype = {
 	update: function() {
 		this.physics.arcade.collide(hero, monster, this.startFight, null, this);
 		this.physics.arcade.collide(hero, ed, null, null, this);
+		this.physics.arcade.collide(hero, jo, null, null, this);
 
 		hero.body.velocity.x = 0;
 		hero.body.velocity.y = 0;
@@ -119,7 +124,7 @@ RubyQuest.rubyquest.prototype = {
 			// this is where the dialogue cycle goes
 			this.currently_talking = true;
 			// set dialogue line to 0 (fist line)
-			currentLine = 0;			
+			currentLine = 0;
 			// bring up the dialogue box
 			$('#dialogue').toggle().css({'position':'absolute','top':$('canvas').offset().top+20+-'px','left':$('canvas').offset().left+20+'px'});
 			// on interact key down, bring up next line in dialogue array
@@ -133,9 +138,9 @@ RubyQuest.rubyquest.prototype = {
 			}
 			// on interact key down, bring up next line in dialogue array
 			$('#dialogue').text(ed.lines[currentLine]);
-			
+
 		}
-		
+
 	},
 
 		// pauses the game

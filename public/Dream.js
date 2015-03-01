@@ -14,7 +14,7 @@ RubyQuest.Dream.prototype = {
 		ruby = this.add.sprite(320, 100, 'ruby');
 		ruby.anchor.setTo(0.5, 0.5);
 
-		hero = this.add.sprite(320, 300, 'hero');
+		hero = this.add.sprite(320, 300, 'herobw');
 		hero.stats = {
 		name: "Wynn",
 		maxHp: 200,
@@ -62,7 +62,6 @@ RubyQuest.Dream.prototype = {
 			} else {
 				hero.animations.stop(null, true);
 			};
-		// this.shatterRuby;
 	},
 
 	interact: function() {
