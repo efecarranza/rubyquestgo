@@ -8,6 +8,7 @@ RubyQuest.rubyquest = function(game) {
 	this.menuKey;
 	this.interactKey;
 	this.pauseKey;
+	this.inputKey;
 	this.dialogue;
 	this.currentLine;
 };
@@ -18,6 +19,8 @@ RubyQuest.rubyquest.prototype = {
 		// there will be an opening scene state
 		// where the hero will be created and passed to
 		// the next scene
+		// this.hero.position.x = hero.position.x;
+		// this.hero.position.y = hero.position.y;
 	},
 
 	create: function() {
@@ -62,6 +65,8 @@ RubyQuest.rubyquest.prototype = {
 		interactKey.onDown.add(this.interact, this);
 		pauseKey = this.input.keyboard.addKey(Phaser.Keyboard.P);
 		pauseKey.onDown.add(this.pause, this);
+		inputKey = this.input.keyboard.addKey(Phaser.Keyboard.I);
+		inputKey.onDown.add(this.gameInput, this);
 
 		this.camera.follow(hero, Phaser.Camera.FOLLOW_TOPDOWN);
 		monster.body.immovable = true;
@@ -114,6 +119,11 @@ RubyQuest.rubyquest.prototype = {
 		if(this.physics.arcade.distanceBetween(hero,ed) < 100){
 			this.talk();
 		}
+	},
+
+	gameInput: function() {
+		console.log('input');
+		$('#input').toggle();
 	},
 
 	// represents whether the hero is talking

@@ -136,7 +136,7 @@ RubyQuest.Dream.prototype = {
 	},
 
 	startGame: function() {
-		this.state.start('rubyquest');
+		this.state.start('rubyquest', false, false, this.hero);
 	},
 
 };
