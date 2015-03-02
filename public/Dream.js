@@ -3,6 +3,8 @@ RubyQuest.Dream = function(game) {
 	this.ruby;
 	this.hero;
 	this.cursors;
+	this.unlockArrows;
+	this.displayedText;
 };
 
 RubyQuest.Dream.prototype = {
@@ -40,6 +42,29 @@ RubyQuest.Dream.prototype = {
 		ruby.body.immovable = true;
 
 		hero.body.collideWorldBounds = true;
+
+		this.txt = ["...huh?...", " What's going on?", " Is this a dream?"];
+
+		this.lblText = this.add.image(100, 100, 'label');
+		this.lblText.height = 50;
+		this.lblText.width = 100;
+		this.txtStyle = { font: "25px Arial", fill: "#fff", align: "center" }
+		this.txtBox = this.add.text(100, 100, this.txt[0], this.txtStyle);
+
+		this.lblText2 = this.add.image(400, 150, 'label');
+		this.lblText2.height = 50;
+		this.lblText2.width = 200;
+		this.txtStyle2 = { font: "25px Arial", fill: "#fff", align: "center" }
+		this.txtBox2 = this.add.text(400, 150, this.txt[1], this.txtStyle);
+
+		this.lblText3 = this.add.image(300, 400, 'label');
+		this.lblText3.height = 50;
+		this.lblText3.width = 200;
+		this.txtStyle = { font: "25px Arial", fill: "#fff", align: "center" }
+		this.txtBox3 = this.add.text(300, 400, this.txt[2], this.txtStyle);
+
+		unlockArrows = false;
+		displayedText = false;
 	},
 
 	update: function() {
@@ -47,28 +72,55 @@ RubyQuest.Dream.prototype = {
 
 		hero.body.velocity.x = 0;
 		hero.body.velocity.y = 0;
-		if (cursors.up.isDown) {
-				hero.body.velocity.y = -80;
-				hero.animations.play('walkup', 10, true);
-			} else if (cursors.down.isDown) {
-				hero.body.velocity.y = 80;
-				hero.animations.play('walkdown', 10, true);
-			} else if (cursors.left.isDown) {
-				hero.body.velocity.x = -80;
-				hero.animations.play('walkleft', 10, true);
-			} else if (cursors.right.isDown) {
-				hero.body.velocity.x = 80;
-				hero.animations.play('walkright', 10, true);
-			} else {
-				hero.animations.stop(null, true);
-			};
+		if (unlockArrows) {
+			if (cursors.up.isDown) {
+					hero.body.velocity.y = -80;
+					hero.animations.play('walkup', 10, true);
+				} else if (cursors.down.isDown) {
+					hero.body.velocity.y = 80;
+					hero.animations.play('walkdown', 10, true);
+				} else if (cursors.left.isDown) {
+					hero.body.velocity.x = -80;
+					hero.animations.play('walkleft', 10, true);
+				} else if (cursors.right.isDown) {
+					hero.body.velocity.x = 80;
+					hero.animations.play('walkright', 10, true);
+				} else {
+					hero.animations.stop(null, true);
+				}
+		};
 	},
 
 	interact: function() {
+		this.setUpText();
+
 		if(this.physics.arcade.distanceBetween(hero, ruby) < 100){
 			this.shatterRuby();
 		}
 
+	},
+
+	setUpText: function() {
+
+		if (!this.displayedText) {
+			this.time.events.add(1500, this.txtBox.destroy, this.txtBox);
+			this.time.events.add(1500, this.lblText.destroy, this.lblText);
+
+			this.time.events.add(2500, this.txtBox2.destroy, this.txtBox2);
+			this.time.events.add(2500, this.lblText2.destroy, this.lblText2);
+
+			this.time.events.add(3500, this.txtBox3.destroy, this.txtBox3);
+			this.time.events.add(3500, this.lblText3.destroy, this.lblText3);
+
+			this.time.events.add(3800, this.unlockArrows, this);
+
+			displayedText = true;
+			// this.setUpText.destroy();
+		}
+	},
+
+	unlockArrows: function() {
+		unlockArrows = true;
 	},
 
 	shatterRuby: function() {

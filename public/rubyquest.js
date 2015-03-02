@@ -25,6 +25,8 @@ RubyQuest.rubyquest.prototype = {
 		this.physics.startSystem(Phaser.Physics.ARCADE);
 		mainmap = this.add.sprite(0, 0, 'map');
 		monster = this.add.sprite(330, 630, 'monster');
+		monster.hp = 100;
+		monster.str = 15;
 
 		jo = this.add.sprite(450, 700, 'cat');
 

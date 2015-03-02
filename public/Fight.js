@@ -12,6 +12,7 @@ RubyQuest.Fight = function(game) {
 	this.heroNamelbl;
 	this.heroMaxHp;
 	this.heroHp;
+	this.counter;
 };
 
 RubyQuest.Fight.prototype = {
@@ -75,17 +76,43 @@ RubyQuest.Fight.prototype = {
 		// Add animations
 		fighterOne.animations.add('attack', [0,1,2,3,4,5,0]);
 
+		counter = 0;
+
 
 	},
 
 	update: function() {
-		hero.stats.hp -= 0.05;
-		this.blood_bar.scale.setTo((hero.stats.hp / hero.stats.maxHp), 1);
 
 	},
 
 	attack: function() {
-		fighterOne.animations.play('attack', 10, false);
+
+		this.rnd = Math.random();
+
+		if (counter % 2 === 0) {
+		  fighterOne.animations.play('attack', 10, false);
+		  if (this.rnd > 0.2) {
+				monster.hp -= hero.stats.str;
+				console.log(monster.hp);
+			} else {
+				console.log('Miss');
+			}
+			if (monster.hp <= 0) {
+				monster.kill();
+				this.time.events.add(2000, this.state.start('rubyquest', false, false), this);
+			}
+			counter++;
+		} else {
+			if (this.rnd > 0.25) {
+			hero.stats.hp -= monster.str;
+			} else {
+				console.log('monster missed');
+			}
+			counter++;
+			hero.stats.hp = parseInt(hero.stats.hp);
+			this.blood_bar.scale.setTo((hero.stats.hp / hero.stats.maxHp), 1);
+			heroHp.setText("HP: " + hero.stats.hp + " /");
+		}
 
 	},
 
