@@ -21,6 +21,7 @@ RubyQuest.rubyquest.prototype = {
 		// the next scene
 		// this.hero.position.x = hero.position.x;
 		// this.hero.position.y = hero.position.y;
+		hero = this.add.sprite(600, 780, 'hero');
 	},
 
 	create: function() {
@@ -39,16 +40,18 @@ RubyQuest.rubyquest.prototype = {
 			"This Ruby was long ago shattered into many pieces.", "Only fragments of it remain, which in common lore are referred to as 'gems.'",
 			"In order to unlock the power of the gem you are going to need to speak to it first...", "Let me explain you the basics:" ]
 
-		hero = this.add.sprite(600, 780, 'hero');
-		hero.stats = {
-		name: "Wynn",
-		maxHp: 200,
-		hp: 200,
-		str: 15,
-		def: 8,
-		level: 1,
-		exp: 0,
-		};
+		hero.loadTexture('hero');
+		this.world.bringToTop(hero);
+		// hero = this.add.sprite(600, 780, 'hero');
+		// hero.stats = {
+		// name: "Wynn",
+		// maxHp: 200,
+		// hp: 200,
+		// str: 15,
+		// def: 8,
+		// level: 1,
+		// exp: 0,
+		// };
 
 		hero.anchor.setTo(0.5, 0.5);
 		hero.animations.add('walkup', [0,1,2,3,4,5,6,7,8]);

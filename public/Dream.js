@@ -112,7 +112,7 @@ RubyQuest.Dream.prototype = {
 			this.time.events.add(3500, this.txtBox3.destroy, this.txtBox3);
 			this.time.events.add(3500, this.lblText3.destroy, this.lblText3);
 
-			this.time.events.add(3800, this.unlockArrows, this);
+			this.time.events.add(3600, this.unlockArrows, this);
 
 			displayedText = true;
 			// this.setUpText.destroy();
@@ -136,6 +136,8 @@ RubyQuest.Dream.prototype = {
 	},
 
 	startGame: function() {
+		hero.position.x = 791;
+		hero.position.y = 858;
 		this.state.start('rubyquest', false, false, this.hero);
 	},
 
